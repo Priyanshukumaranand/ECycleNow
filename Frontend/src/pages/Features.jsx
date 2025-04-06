@@ -1,111 +1,83 @@
+import { FaBell, FaLink, FaRecycle, FaRobot } from "react-icons/fa";
+import { FaSackDollar } from "react-icons/fa6";
+import { IoIosGift, IoIosStats } from "react-icons/io";
+import { ImBin2 } from "react-icons/im";
 import Layout from "../components/layout/Layout"
-import { useState, useEffect } from "react"
+
+const features = [
+    {
+        title: "IoT-Based Smart Bins",
+        desc: "Automatically detect, categorize, and record e-waste disposal using sensors for efficient recycling.",
+        icon: <ImBin2 size={32} />,
+    },
+    {
+        title: "AI-Powered Waste Classification",
+        desc: "Uses Gemini AI to accurately identify the type and recyclability of e-waste items in real-time.",
+        icon: <FaRobot size={32} />,
+    },
+    {
+        title: "Blockchain-Backed Transparency (IDX)",
+        desc: "Tracks the journey of each e-waste item with immutable records, ensuring trust and traceability.",
+        icon: <FaLink size={32} />,
+    },
+    {
+        title: "User Incentives System",
+        desc: "Eco-friendly behavior is rewarded through credits, coupons, or discounts for responsible disposal.",
+        icon: <IoIosGift size={32} />,
+    },
+    {
+        title: "Real-Time Notifications for Collection Centers",
+        desc: "Instant alerts when bins are full or nearing capacity, optimizing collection operations.",
+        icon: <FaBell size={32} />,
+    },
+    {
+        title: "Circular Economy Marketplace",
+        desc: "Facilitates buying, selling, donating, or repairing used electronics to promote reuse.",
+        icon: <FaRecycle size={32} />,
+    },
+    {
+        title: "Dynamic Price Estimation",
+        desc: "AI suggests fair resale prices for used gadgets based on real-time condition and market data.",
+        icon: <FaSackDollar size={32} />,
+    },
+    {
+        title: "Sustainability Dashboard",
+        desc: "Visualizes your environmental impact—track CO₂ saved, items recycled, and more.",
+        icon: <IoIosStats size={32} />,
+    }
+];
 
 const Features = () => {
-    const [featuresData, setFeaturesData] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-
-    useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const response = await fetch('/api/featuresdata');
-                
-                if (!response.ok) {
-                    throw new Error(`Network error: ${response.status} ${response.statusText}`);
-                }
-                
-                const data = await response.json();
-                setFeaturesData(data);
-                setLoading(false);
-            } catch (error) {
-                console.error("Fetching error:", error);
-                setError(error.message);
-                setLoading(false);
-            }
-        };
-        
-        fetchData();
-        
-        return () => {}; 
-    }, []);
-
-    if (loading) return (
-        <Layout>
-            <div className="custom-padding flex justify-center items-center h-64">
-                <div className="animate-pulse">Loading features...</div>
-            </div>
-        </Layout>
-    );
-    
-    if (error) return (
-        <Layout>
-            <div className="custom-padding text-red-500">
-                <h2>Error loading features</h2>
-                <p>{error}</p>
-                <p>Please try again later or contact support.</p>
-            </div>
-        </Layout>
-    );
-    
     return (
         <Layout>
-            <div className="custom-padding">
-                <header className="text-center mb-12">
-                    <h1 className="text-4xl font-bold mb-4">{featuresData?.title || "Our Features"}</h1>
-                    <p className="text-xl text-gray-600">{featuresData?.subtitle || ""}</p>
-                </header>
-                
-                {/* Main Features */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-                    {featuresData?.mainFeatures?.map((feature) => (
-                        <div key={feature.id} className="bg-white p-6 rounded-lg shadow-md border-l-4 border-green-500">
-                            <h3 className="text-2xl font-semibold mb-3">{feature.title}</h3>
-                            <p className="text-gray-700">{feature.description}</p>
+            {/* Banner Section */}
+            <section className="relative w-full h-[300px] bg-green-800 flex items-center justify-center text-white text-center">
+                <div className="z-10 ">
+                    <h1 className="text-4xl md:text-5xl font-bold">
+                        Platform Features
+                    </h1>
+                    <p className="text-lg mt-3 max-w-2xl mx-auto">
+                        Explore the smart and sustainable features of ECycleNow.
+                    </p>
+                </div>
+                <div className="absolute inset-0 bg-black/20"></div>
+            </section>
+
+            {/* Features Grid */}
+            <section className="py-10 px-4 max-w-7xl mx-auto">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+                    {features.map(({ title, desc, icon }, index) => (
+                        <div
+                            key={index}
+                            className="bg-green-100 hover:bg-green-200 transition-all duration-300 ease-in-out p-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-[1.02] cursor-default"
+                        >
+                            <div className="text-4xl mb-3 text-green-800">{icon}</div>
+                            <h3 className="text-xl font-semibold text-green-800 mb-2">{title}</h3>
+                            <p className="text-gray-700">{desc}</p>
                         </div>
                     ))}
                 </div>
-                
-                {/* Statistics */}
-                {featuresData?.stats && (
-                    <div className="bg-green-50 p-8 rounded-lg mb-12">
-                        <h2 className="text-2xl font-semibold mb-6 text-center">Our Impact</h2>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
-                            <div>
-                                <p className="text-3xl font-bold text-green-600">{featuresData.stats.locationsCount}</p>
-                                <p className="text-sm text-gray-600">Drop-off Locations</p>
-                            </div>
-                            <div>
-                                <p className="text-3xl font-bold text-green-600">{featuresData.stats.itemsRecycled}</p>
-                                <p className="text-sm text-gray-600">Items Recycled</p>
-                            </div>
-                            <div>
-                                <p className="text-3xl font-bold text-green-600">{featuresData.stats.pointsAwarded}</p>
-                                <p className="text-sm text-gray-600">Points Awarded</p>
-                            </div>
-                            <div>
-                                <p className="text-3xl font-bold text-green-600">{featuresData.stats.co2Reduced}</p>
-                                <p className="text-sm text-gray-600">CO2 Reduced</p>
-                            </div>
-                        </div>
-                    </div>
-                )}
-                
-                {/* Additional Features */}
-                {featuresData?.additionalFeatures && featuresData.additionalFeatures.length > 0 && (
-                    <div className="mb-8">
-                        <h2 className="text-2xl font-semibold mb-4">Additional Services</h2>
-                        <ul className="grid grid-cols-1 md:grid-cols-2 gap-3">
-                            {featuresData.additionalFeatures.map((feature, index) => (
-                                <li key={index} className="flex items-center">
-                                    <span className="mr-2 text-green-500">✓</span>
-                                    {feature}
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                )}
-            </div>
+            </section>
         </Layout>
     )
 }

@@ -21,7 +21,7 @@ const privateNavigationItems = [
 const Header = () => {
     const { isAuthenticated, user, logout } = useAuth();
     const [activeTab, setActiveTab] = useState(window.location.pathname);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
     function classNames(...classes) {
         return classes.filter(Boolean).join(" ");
@@ -35,7 +35,7 @@ const Header = () => {
     //                 credentials: 'include'
     //             });
     //             const data = await response.json();
-                
+
     //             if (data.isAuthenticated) {
     //                 // Update active tab if user is authenticated
     //                 const savedTab = localStorage.getItem('activeTab');
@@ -53,7 +53,7 @@ const Header = () => {
 
 
 
-    
+
 
     // Update localStorage when activeTab changes
     useEffect(() => {
@@ -78,7 +78,7 @@ const Header = () => {
     };
 
     return (
-        <Disclosure as="nav" className="bg-green-700 drop-shadow-lg sticky top-0 z-10">
+        <Disclosure as="nav" className="bg-green-700 drop-shadow-lg sticky top-0 z-20">
             <div className="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
                 <div className="relative flex h-16 items-center justify-between">
                     <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
