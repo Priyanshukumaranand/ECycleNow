@@ -11,7 +11,7 @@ const Login = () => {
 
                 <div className="flex flex-col gap-4">
                     <a
-                        href="http://localhost:8000/api/auth/google"
+                        href={`${import.meta.env.VITE_BACKEND_URL}/api/auth/google`}
                         className="flex items-center justify-center gap-3 bg-white hover:bg-gray-100 text-gray-700 font-semibold py-4 px-8 border border-gray-300 rounded-lg shadow-sm transition duration-200"
                     >
                         <img

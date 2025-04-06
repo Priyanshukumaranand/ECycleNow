@@ -25,7 +25,7 @@ export const AuthProvider = ({ children }) => {
     useEffect(() => {
         const checkAuthStatus = async () => {
             try {
-                const response = await fetch('http://localhost:8000/api/auth/check', {
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/check`, {
                     credentials: 'include',
                 });
                 const data = await response.json();

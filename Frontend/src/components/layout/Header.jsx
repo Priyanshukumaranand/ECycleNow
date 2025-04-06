@@ -68,7 +68,7 @@ const Header = () => {
 
     const handleLogout = async () => {
         try {
-            await fetch('http://localhost:8000/api/auth/logout', {
+            await fetch(`${import.meta.env.VITE_BACKEND_URL}/api/auth/logout`, {
                 credentials: 'include'
             });
             logout(); // clears context + localStorage
