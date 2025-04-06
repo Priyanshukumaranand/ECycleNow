@@ -3,6 +3,7 @@ import { Disclosure, DisclosureButton, DisclosurePanel, Menu, MenuButton, MenuIt
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useAuth } from "../../Context/authContext.jsx";
 import { useNavigate } from "react-router-dom";
+import  { Link } from "react-router-dom";
 
 const publicNavigationItems = [
     { name: "Home", href: "/" },
@@ -63,7 +64,7 @@ const Header = () => {
     // Update activeTab when route changes
     useEffect(() => {
         setActiveTab(window.location.pathname);
-    }, [window.location.pathname]);
+    }, []);
 
     const handleLogout = async () => {
         try {
@@ -89,7 +90,7 @@ const Header = () => {
                         </DisclosureButton>
                     </div>
                     <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                        <a href="/">
+                        <Link to="/">
                             <div className="flex shrink-0 items-center">
                                 <img
                                     alt="Your Company"
@@ -98,15 +99,15 @@ const Header = () => {
                                 />
                                 <p className="text-white text-3xl ml-5">ECycleNow</p>
                             </div>
-                        </a>
+                        </Link>
                     </div>
                     <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                         <div className="hidden sm:ml-6 sm:block">
                             <div className="flex space-x-2">
                                 {(isAuthenticated ? privateNavigationItems : publicNavigationItems).map((item) => (
-                                    <a
+                                    <Link
                                         key={item.name}
-                                        href={item.href}
+                                        to={item.href}
                                         onClick={() => setActiveTab(item.href)}
                                         className={classNames(
                                             activeTab === item.href
@@ -116,7 +117,7 @@ const Header = () => {
                                         )}
                                     >
                                         {item.name}
-                                    </a>
+                                    </Link>
                                 ))}
                             </div>
                         </div>
@@ -135,24 +136,24 @@ const Header = () => {
                                 </div>
                                 <MenuItems className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black/5 transition">
                                     <MenuItem>
-                                        {({ active }) => (
-                                            <a
-                                                href="/dashboard"
+                                        {({ focus }) => (
+                                            <Link
+                                                to="/dashboard"
                                                 className={classNames(
-                                                    active ? "bg-gray-100" : "",
+                                                    focus ? "bg-gray-100" : "",
                                                     "block px-4 py-2 text-sm text-green-700"
                                                 )}
                                             >
                                                 Dashboard
-                                            </a>
+                                            </Link>
                                         )}
                                     </MenuItem>
                                     <MenuItem>
-                                        {({ active }) => (
+                                        {({ focus }) => (
                                             <button
                                                 onClick={handleLogout}
                                                 className={classNames(
-                                                    active ? "bg-gray-100" : "",
+                                                    focus ? "bg-gray-100" : "",
                                                     "block w-full text-left px-4 py-2 text-sm text-green-700"
                                                 )}
                                             >

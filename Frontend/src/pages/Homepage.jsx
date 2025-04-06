@@ -1,6 +1,8 @@
-import { FaBrain, FaRecycle } from "react-icons/fa"
-import { FaEarthAmericas } from "react-icons/fa6"
-import Layout from "../components/layout/Layout"
+import { FaBrain, FaRecycle } from "react-icons/fa";
+import { FaEarthAmericas } from "react-icons/fa6";
+import Layout from "../components/layout/Layout";
+import  { Link } from "react-router-dom";
+
 
 const Homepage = () => {
     return (
@@ -14,12 +16,12 @@ const Homepage = () => {
                             Join ECycleNow &ndash; India&apos;s most trusted platform to recycle electronic waste responsibly and earn eco-rewards.
                         </p>
                         <div className="mt-8">
-                            <a
-                                href="/register"
+                            <Link
+                                to="/register"
                                 className="bg-white text-green-800 px-6 py-3 font-semibold rounded-full hover:bg-gray-200 transition"
                             >
                                 Get Started
-                            </a>
+                            </Link>
                         </div>
                     </div>
                     <div className="absolute inset-0 bg-black/20"></div>
@@ -32,12 +34,12 @@ const Homepage = () => {
                         Join thousands of users across India taking small steps for a better planet.
                     </p>
                     <div className="mt-8">
-                        <a
-                            href="/register"
+                        <Link
+                            to="/register"
                             className="bg-green-700 text-white px-8 py-3 font-semibold rounded-full hover:bg-green-600 transition"
                         >
                             Schedule Your First Pickup
-                        </a>
+                        </Link>
                     </div>
                 </section>
 
@@ -66,9 +68,9 @@ const Homepage = () => {
                                 <div key={title} className="bg-green-50 p-6 rounded-xl shadow-md flex flex-col">
                                     <h3 className="text-xl font-semibold text-green-800 mb-2">{title}</h3>
                                     <p className="text-gray-700 mb-4 flex-grow">{desc}</p>
-                                    <a href={link} className="text-green-700 font-semibold hover:underline">
+                                    <Link to={link} className="text-green-700 font-semibold hover:underline">
                                         Read more &rarr;
-                                    </a>
+                                    </Link>
                                 </div>
                             ))}
                         </div>
